@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #242424;
+    font-family: sans-serif;
+    /*para tirar a serifa (barra ou traço de certas letras, como o "S")*/
+    word-wrap: break-word;
+    /*se o navegador pode ou não quebrar as linhas nas palavras*/
+    overflow-wrap: break-word;
+    /*se o navegador pode ou não quebrar linhas com palavras longas, se elas ultrapassarem seu contêiner*/
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-weight: 900;
+    color: #000;
+}
+
+.wrapper {
+    width: 100%;
+    /*largura de 100% da tela*/
+    margin: 0 auto;
+    /*margem 0 em cima e baixo, e automática na esquerda e na direita*/
+}
+
+main {
+    display: block;
+    /*o elemento se comporta como um bloco. Ocupando praticamente toda a largura disponível na página. Elementos de parágrafo(p) e título(h1,h2,...) possuem esse comportamento por padrão*/
+    background-color: #fff;
+}
+
+.container {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px;
+    /*a distância entre o conteúdo de um elemento e as suas bordas*/
+}
+
+section.module p {
+    /*todos os itens terão essa margem, menos o último*/
+    margin-bottom: 40px;
+    /*define a margem na área inferior de um elemento*/
+}
+
+section.module:last-child {
+    /*querendo acessar o último item (filho)*/
+    margin-bottom: 0;
+}
+
+section.module h2 {
+    margin-bottom: 40px;
+    font-size: 30px;
+}
+
+section.module.content {
+    padding: 40px 0;
+    background: #ece7d5;
+}
+
+section.module.parallax {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh !important;
+    /*altura do conteúdo/elemento, como está em 100vh, vai ser toda a tela logo ao entrar na página*/
+    width: 100%;
+    position: relative;
+    /*posição relativa do elemento*/
+    overflow: hidden;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    /*para a imagem não se repetir no fundo*/
+    background-attachment: fixed;
+    /*cria o efeito parallax: a imagem fica fixa e o texto passando em cima dela na rolagem*/
+    background-size: cover;
+    -webkit-background-size: cover;
+    /*tamanhado do fundo padrão independente do navegador usado*/
+    -moz-background-size: cover;
+    /*para o navegador mozilla firefox*/
+    -o-background-size: cover;
+    /*para o navegador opera*/
+}
+
+
+section.module.parallax:after {
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 8;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 40%, #000 100%);
+    /*para criar a sombra na imagem, o primeiro rgba define a sombra na parte de cima, o segundo é para a parte de baixo, a opacidade é definida na porcentagem, nesse caso 40%*/
+    background: -moz-linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 40%, #000 100%);
+    background: -webkit-linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 40%, #000 100%);
+    /*para os demais navegadores*/
+}
+
+section.module.parallax-1 {
+    background-image: url("https://images.pexels.com/photos/3408354/pexels-photo-3408354.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+}
+
+section.module.parallax-2 {
+    background-image: url("https://images.pexels.com/photos/2695391/pexels-photo-2695391.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+}
+
+section.module.parallax-3 {
+    background-image: url("https://images.pexels.com/photos/2350366/pexels-photo-2350366.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+}
+
+section.module.parallax h1 { /*os títulos serão em letra maiúscula*/
+    /*acessando o h1 da section module parallax definida no html*/
+    color: #fff;
+    text-align: center;
+    font-size: 78px;
+    z-index: 50;
+    text-transform: uppercase;
+}

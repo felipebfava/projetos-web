@@ -1,0 +1,39 @@
+Propriedade Display
+Entendendo e manipulando o fluxo dos elementos:
+Entender a propriedade display é fundamental para que possamos compreender o fluxo e estruturação de uma página web. Todos os elementos por padrão já possuem um valor para a propriedade e, geralmente estas são block ou inline.
+
+Essa propriedade CSS especifica o tipo de renderização do elemento na página. Uma definição que pode auxiliar no entendimento da propriedade é a do Chris Coyier, bastante reconhecido no mundo do CSS, que é a seguinte:
+
+Todo elemento em uma página web é renderizado como uma caixa retangular. A propriedade display de CSS vai determinar como essa caixa vai ser comportar
+
+Os possíveis tipos
+Block
+O elemento se comporta como um bloco. Ocupando praticamente toda a largura disponível na página. Elementos de parágrafo (p) e título(h1, h2, ...) possuem esse comportamento por padrão.
+
+Inline
+O elemento se comporta como um elemento em linha. Exemplos de elemento que se comportam assim são por exemplo as tags span e a.
+
+None
+Ao contrários dos valores atuais, o valor none permite, informalmente dizendo, que você desative a propriedade do elemento. Quando você utiliza essa propriedade, o elemento e todos seus elementos filhos não são renderizados na página.
+
+Uma coisa importante a ressaltar que a propriedade display: none não é a mesma coisa da propriedade visibility: hidden. Nessa última o elemento não aparece na tela mas é renderizado na página, ou seja, vemos um espaço vazio no lugar do elemento; já a propriedade display: none não renderiza o elemento e, o espaço que era ocupado por ele, é ocupado pelo elemento seguinte no fluxo do documento.
+
+Table
+O elemento se comporta como uma tabela.
+
+Inline-block
+Semelhante ao inline, no entanto, ao definirmos inline-block em um elemento, conseguimos definir as propriedades de largura e altura para ele. Coisa que não conseguimos em um elemento com display: inline.
+
+Propriedade Overflow
+Essa propriedade especifica se o conteúdo deve ser recortado ou se barras de rolagem devem ser adicionadas quando o conteúdo de um elemento for muito grande para caber na área especificada.
+
+O overflow possui os seguintes valores:
+
+visible- Padrão. O estouro não é recortado. O conteúdo é renderizado fora da caixa do elemento
+hidden- O estouro é recortado e o restante do conteúdo ficará invisível
+scroll- O estouro é recortado e uma barra de rolagem é adicionada para ver o restante do conteúdo
+auto- Semelhante a scroll, mas adiciona barras de rolagem somente quando necessário
+overflow-wrap: Especifica se o navegador pode ou não quebrar linhas com palavras longas, caso elas estourem (overflow) seu contêiner
+overflow-x: Especifica o que fazer com as bordas esquerda/direita do conteúdo se ele ultrapassar a área de conteúdo do elemento
+overflow-y: Especifica o que fazer com as bordas superior/inferior do conteúdo se ele ultrapassar a área de conteúdo do elemento
+
