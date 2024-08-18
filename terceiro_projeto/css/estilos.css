@@ -115,3 +115,7 @@ section.module.parallax h1 { /*os títulos serão em letra maiúscula*/
     z-index: 50;
     text-transform: uppercase;
 }
+
+.area-1, .area-2, .area-3{
+    visibility: hidden; /*altera a visibilidade do elemento, nesse caso, ele fica invisível*/
+}
