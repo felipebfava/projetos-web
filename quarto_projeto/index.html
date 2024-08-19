@@ -1,84 +1,84 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/estilos.css"/>
-    <title>FlexBox</title>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <title>CoffeeType</title>
+    <meta name="description" content="primeira descrição">
 </head>
 <body>
-    <h1>display: block;</h1>
-    <section class = "container">
-        <div class = "item">1</div>
-        <div class = "item">2</div>
-        <div class = "item">3</div>
-        <div class = "item">4</div>
-    </section>
+    <header>
+        <nav>
+            <span class="logo">ballecoffe</span>
+            <ul class="menu"> <!--tag 'ul' para listas não ordenadas de elementos, para montar menus-->
+                <li><a>Home</a></li> <!--tag 'a' para adicionar links clicáveis-->
+                <li><a>Receitas</a></li>
+                <li><a>Novidades</a></li>
+                <li><a>Melhor avaliadas</a></li>
+            </ul>
+            <a class="github">Github</a>
+        </nav>
+    </header>
 
-    <h1>display: flex;</h1>
-    <section class="container flex">
-        <div class = "item">1</div>
-        <div class = "item">2</div>
-        <div class = "item">3</div>
-        <div class = "item">4</div>
-    </section>
+    <main> <!--para fazer a parte do hero, o conteúdo que chamará atenção na landing page-->
+        <div class="principal">
+            <section class="hero">
+                <header class="hero-conteudo">
+                    <span class="destaque marrom">novidade</span>
+                    <h1>Título da página</h1>
+                    <hr> <!--para fazer uma linha horizontal-->
+                    <h2 class="hero-subtitulo">Subtítulo</h2>
+                </header>
+                <div class="hero-imagens-container"> <!--parte das imagens-->
+                    <figure><img src="./assets/imagem-cafe-1.jpg"></figure>
+                    <figure><img src="./assets/imagem-cafe-2.jpg"></figure>
+                    <figure><img src="./assets/imagem-cafe-3.jpg"></figure>
+                    <figure><img src="./assets/imagem-cafe-4.jpg"></figure>
+                    <figure><img src="./assets/imagem-cafe-5.jpg"></figure>
+                    <figure><img src="./assets/imagem-cafe-6.jpg"></figure>
+                    <figure><img src="./assets/imagem-cafe-7.jpg"></figure>
+                    <figure><img src="./assets/imagem-cafe-8.jpg"></figure>
+                    <figure><img src="./assets/imagem-cafe-9.jpg"></figure>
+                    <figure><img src="./assets/imagem-cafe-10.jpg"></figure>
+                </div>
+            </section>
+        </div>
 
-    <h1>display: flex;</h1>
-    <section class="container flex">
-        <div class = "item">1</div>
-        <div class = "item">2</div>
-        <div class = "item">3</div>
-        <div class = "item">4</div>
-        <div class = "item">5</div>
-        <div class = "item">6</div>
-        <div class = "item">7</div>
-    </section>
+        <section class="botao-container">
+            <button type="button">
+                <img src="./assets/chevrons-down.jpg">
+            </button>
+        </section>
 
-    <h1>display: flex;</h1>
-    <section class="container flex flex-wrap">
-        <div class = "item">1</div>
-        <div class = "item">2</div>
-        <div class = "item">3</div>
-        <div class = "item">4</div>
-        <div class = "item">5</div>
-        <div class = "item">6</div>
-        <div class = "item">7</div>
-    </section>
+        <section>
+            <header>
+                <span>receitas</span>
+                <h2>Segundo Subtítulo</h2>
+                <p>Dê uma olhada nas receitas mais amadas</p><!--tag 'p' para parágrafos-->
+            </header>
+            <div>
+                <div>
+                    <header>
+                        <div>
+                            <span>em alta</span>
+                            <h3>Cappuccino</h3>
+                        </div>
+                        <p>Extraordinário  4/4</p>
+                    </header>
+                    <p>Descrição</p>
+                    <div>
+                        <img src="https://avatars.githubusercontent.com/u/129697196?v=4">
+                        <span>Nome do autor</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <h1>display: flex; // flex-item-1</h1>
-    <section class="container flex-item-1">
-        <div class="item flex-item-1">Teste 1</div>
-        <div class="item flex-item-1">Teste 2</div>
-        <div class="item flex-item-1">Teste 3</div>
-    </section>
-
-    <h1>flex-direction: row;</h1>
-    <section class="container row">
-        <div class="item">1</div>
-        <div class="item">2</div>
-        <div class="item">3</div>
-    </section>
-
-    <h1>flex-direction: row-reverse;</h1>
-    <section class="container row-reverse">
-        <div class="item">1</div>
-        <div class="item">2</div>
-        <div class="item">3</div>
-    </section>
-
-    <h1>flex-direction: column;</h1>
-    <section class="container column">
-        <div class="item">1</div>
-        <div class="item">2</div>
-        <div class="item">3</div>
-    </section>
-
-    <h1>flex-direction: column-reverse;</h1>
-    <section class="container column-reverse">
-        <div class="item">1</div>
-        <div class="item">2</div>
-        <div class="item">3</div>
-    </section>
-
+    <footer>
+        <p>parágrafo</p>
+        <p>outro parágrafo</p>
+    </footer>
 </body>
 </html>
