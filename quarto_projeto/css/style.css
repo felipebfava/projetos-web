@@ -94,6 +94,10 @@ main{
     color: #A45A49;
 }
 
+.amarelo{
+    color: #E7A80E;
+}
+
 h1{
     font-family: Montserrat;
     font-size: 3.5rem;
@@ -136,4 +140,129 @@ button{
     padding: 1rem;
     border-radius: 0.5rem;
     background: #A45A49;
+}
+
+.receitas{
+    display: flex;
+    flex-direction: column;
+    max-width: 1120px;
+    padding: 3rem 2rem;
+    /*margin: auto; tirando isso aqui, o resto funciona*/
+}
+
+.receitas-cabecalho{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+}
+
+.receitas-titulo{
+    font-family: Montserrat;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #FFF2EF;
+}
+
+.receitas-subtitulo{
+    color: #C7BAB3;
+    font-family: Inter;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.receitas-card-container{
+    padding: 0rem 10rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.receitas-card{
+    background: #241A1C;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex-basis: 29rem;
+    margin-top: 2rem;
+}
+
+.receitas-card-cabecalho{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /*erro, nao funciona, deveria separar o sabor do cafe com a avaliacao*/
+    align-items: end; /*funciona, deixa alinhado com o sabor do cafe*/
+}
+
+.receitas-card-cabecalho-detalhes{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.receita-titulo{
+    color: #FFF2EF;
+    font-family: Montserrat;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.receita-avaliacao{
+    color: #756A67;
+    font-family: Inter;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.receita-descricao{
+    color: #C7BAB3;
+    font-family: Inter;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.receita-autor{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.receita-autor > img {
+    border-radius: 20rem;
+    width: 1.5rem;
+}
+
+.receita-autor-nome{
+    color: #C7BAB3;
+    font-family: Inter;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+footer{
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    background: #23181A;
+}
+
+.footer-copy{
+    color: #FFF2EF;
+    font-family: Inter;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.footer-autor{
+    color: rgba(255, 242, 231, 0.50);
+    font-family: Inter;
+    font-size: 1rem;
+    font-weight: 500;
 }
