@@ -1,0 +1,501 @@
+1. Use o conteúdo HTML abaixo contém a estrutura base para uma página com barra de navegação (logotipo a esquerda e menu a direita), cabeçalho, conteúdo principal dividido em três colunas e rodapé.
+Adicione o estilo CSS para organizar os elementos.
+Use 3 estilos diferentes para organizar o conteúdo:
+    Estilo 1: use display: block com float.
+    Estilo 2: use display: flex com flex-direction, justify-content, align-items, etc
+    Estilo 3: use display: grid com grid-template-columns, grid-template-areas, etc
+
+2. Criar um sistema web para uma lista de tarefas. O sistema deve permitir adicionar, remover e marcar como concluída uma tarefa. Além disso, faça:
+    Adicionar um campo de texto para filtrar as tarefas por nome.
+    Armazenar as tarefas no localStorage para que elas não sejam perdidas ao recarregar a página.
+    Popular a lista de tarefas com alguns dados fictícios, caso o localStorage esteja vazio.
+    Identificar as tarefas concluídas de alguma maneira.
+    Adicionar uma família de fonte externa ao sistema. Pode ser do Google Fonts ou de outra fonte de sua escolha.
+    Adicionar a opção de escolher entre temas claro e escuro. Salvar a escolha no localStorage.
+    Acessibilidade: respeitar o critério 1.3.1 sobre informações e relações da WCAG disponível em: https://www.guia-wcag.com/.
+    Acessibilidade: respeitar o critério 2.1.1 sobre teclado da WCAG disponível em: https://www.guia-wcag.com/.
+        (opcional): Adicionar animações de transição ao adicionar, remover e marcar como concluída uma tarefa.
+
+3. A página picsum.photos contém uma API que retorna imagens aleatórias. Crie um sistema web que tenha um formulário para o usuário informar a largura e a altura da imagem que deseja e a quantidade de imagens (escolher entre 3, 5, 10 ou 20). Ao clicar em um botão, o sistema deve exibir as imagens retornadas pela API. O resultado deve ser organizado como um grid de imagens. Permita que o usuário possa baixar a imagem que desejar em tamanho Full HD. As imagens precisam estar no formato webp. Leia a documentação da API para saber como fazer a requisição: https://picsum.photos/. Além disso, faça:
+
+    Adicionar validação de formulário para os campos de largura, altura e quantidade de imagens. Caso o usuário informe um valor inválido, exibir uma mensagem de erro. Use html5 e/ou JavaScript para fazer a validação. Traga valores padrões para os campos.
+    Adicionar um botão/link para copiar o link da imagem. Use a API navigator.clipboard para fazer isso.
+    Adicionar um botão/link para compartilhar a imagem no WhatsApp, por e-mail ou outra rede social.
+    Acessibilidade: respeitar o critério 1.1.1 sobre conteúdo não textual da WCAG disponível em: https://www.guia-wcag.com/.
+    Acessibilidade: respeitar o critério 1.4.3 sobre contraste mínimo da WCAG disponível em: https://www.guia-wcag.com/.
+    Acessibilidade: respeitar o critério 2.4.4 sobre foco visível da WCAG disponível em: https://www.guia-wcag.com/.
+
+4. Criar um sistema web que permita ao usuário tirar uma foto com a câmera do dispositivo e marcar a localização da foto em um mapa. O sistema deve exibir a foto tirada e a localização no mapa. Além disso, faça:
+
+    Adicionar um botão para tirar a foto. Use a API navigator.mediaDevices.getUserMedia para acessar a câmera do dispositivo. Caso o dispositivo não tenha câmera, permitir que o usuário faça o upload de uma foto.
+    Adicionar um botão para marcar a localização da foto no mapa. Use a API navigator.geolocation para acessar a localização do dispositivo. Caso o dispositivo não tenha GPS, permitir que o usuário informe a localização manualmente.
+    Adicionar um campo de texto para o usuário informar título (obrigatório) e descrição (opcional) da foto.
+    Armazenar a foto e a localização no localStorage para que elas não sejam perdidas ao recarregar a página.
+    Criar uma tabela para exibir id, título, descrição, localização e data da foto. Adicionar um botão para visualizar detalhes da foto em uma modal ou em outra página. Para a localização, exibir um mapa com a localização marcada.
+    Adicionar um botão para excluir o registro. Exibir um modal de confirmação antes de excluir a foto.
+    Adicionar um botão para editar o registro. Exibir um formulário com os campos preenchidos para que o usuário possa editar o registro.
+
+Estou fazendo uma aplicação Web, porém falta algumas coisas:
+Um botão para ver todos os detalhes das fotos adicionadas (melhor abrir em outra página/aba), ou criar um modal. Conforme descrito em:
+ Adicionar um botão para visualizar detalhes da foto em outra página. Para a localização, exibir um mapa com a localização marcada.
+
+Teremos um botão com o título Detalhes, onde terá todas as informações sobre a foto
+Outro botão para ver somente a localização
+Outro botão para editar o conteúdo já salvo (da foto)
+Outro botão para excluir a foto
+cada foto pode ser tirada pela extensão de câmera ou fazer upload, obrigatório ter título e opcional ter descrição
+Para o mapa é usado a extensão leaflet.
+Teremos que armazenar a foto e a localização no localStorage para que elas não sejam perdidas ao recarregar a página.
+Aqui está o código até agora (mude ele):
+HTML;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foto e Localização</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container"> <!-- Início da classe container -->
+
+        <header>
+            <h1>Captura de Foto e Localização</h1>
+        </header>
+
+        <main>
+            <section id="photo-section">
+                <button id="capture-photo">Tirar Foto</button>
+                <button id="upload-photo">Fazer Upload</button>
+                <input type="file" id="file-input" accept="image/*" style="display: none;">
+                <video id="video" width="640" height="480" autoplay></video>
+                <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+                <img id="photo" style="display: none;" />
+            </section>
+            
+            <section id="location-section">
+                <button id="get-location">Marcar Localização</button>
+                <button id="manual-location">Informar Localização Manualmente</button>
+                <input type="text" id="latitude" placeholder="Latitude" style="display: none;">
+                <input type="text" id="longitude" placeholder="Longitude" style="display: none;">
+                <button id="save-location" style="display: none;">Salvar Localização</button>
+                <div id="map" style="height: 300px;"></div>
+            </section>
+
+            <section id="details-section">
+                <input type="text" id="title" placeholder="Título (obrigatório)" />
+                <textarea id="description" placeholder="Descrição (opcional)"></textarea>
+                <button id="save-photo">Salvar Foto e Localização</button>
+            </section>
+
+            <section id="gallery">
+                <table id="gallery-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Descrição</th>
+                            <th>Localização</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+        </main>
+
+    </div> <!-- Fim da classe container -->
+
+    <!-- Modal para detalhes -->
+    <div id="details-modal" style="display: none;">
+        <div id="modal-content">
+            <span id="close-modal">&times;</span>
+            <h2 id="modal-title">Título da Foto</h2>
+            <img id="modal-photo" alt="Foto" style="width: 100%; height: auto;" />
+            <img id="modal-photo" />
+            <div id="modal-map" style="height: 300px;"></div>
+            <p id="modal-title"></p>
+            <p id="modal-description"></p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
+
+CSS:
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px; /* Largura máxima */
+    margin: 0 auto;    /* Centraliza o conteúdo */
+    padding: 20px;     /* Espaçamento interno */
+}
+
+
+header {
+    text-align: center;
+    margin: 20px 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section {
+    margin: 20px 0;
+}
+
+#map {
+    width: 100%;
+}
+
+#gallery-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#gallery-table th, #gallery-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#gallery-table th {
+    background-color: #f4f4f4;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+}
+
+#details-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+    height: 80%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#modal-map {
+    width: 100%;
+    height: 300px; /* Certifique-se de que o mapa da modal tenha altura adequada */
+    margin-top: 10px;
+}
+
+#modal-photo {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+#close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+#map {
+    width: 100%;
+    height: 300px;
+    margin-top: 20px;
+}
+
+JavaScript (rever a lógica das funções):
+document.addEventListener('DOMContentLoaded', function() {
+    const capturePhotoBtn = document.getElementById('capture-photo');
+    const uploadPhotoBtn = document.getElementById('upload-photo');
+    const fileInput = document.getElementById('file-input');
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const photo = document.getElementById('photo');
+    const getLocationBtn = document.getElementById('get-location');
+    const manualLocationBtn = document.getElementById('manual-location');
+    const latitudeInput = document.getElementById('latitude');
+    const longitudeInput = document.getElementById('longitude');
+    const saveLocationBtn = document.getElementById('save-location');
+    const map = document.getElementById('map');
+    const titleInput = document.getElementById('title');
+    const descriptionInput = document.getElementById('description');
+    const savePhotoBtn = document.getElementById('save-photo');
+    const galleryTableBody = document.querySelector('#gallery-table tbody');
+    const detailsModal = document.getElementById('details-modal');
+    const closeModal = document.getElementById('close-modal');
+    const modalPhoto = document.getElementById('modal-photo');
+    const modalMap = document.getElementById('map');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+
+    let modalMapInstance = null; // Variável para armazenar a instância do mapa da modal
+    
+    function openDetailsModal(photoId) {
+        const photos = JSON.parse(localStorage.getItem('photos')) || [];
+        const photoData = photos.find(photo => photo.id == photoId);
+
+        if (photoData) {
+            // Preenche os detalhes da modal
+            modalTitle.textContent = photoData.title;
+            modalDescription.textContent = photoData.description || 'Sem descrição';
+            modalPhoto.src = photoData.photoUrl;
+
+            // Limpa o conteúdo anterior do contêiner do mapa
+            document.getElementById('map').innerHTML = ""; // IMPORTANTE: limpa o contêiner do mapa
+
+            // Recria o mapa dentro da modal
+            modalMapInstance = L.map(modalMap).setView([photoData.latitude, photoData.longitude], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(modalMapInstance);
+            L.marker([photoData.latitude, photoData.longitude]).addTo(modalMapInstance);
+
+            // Mostra a modal
+            detailsModal.style.display = 'block';
+        }
+    }
+
+    // Fechar a modal ao clicar no botão de fechar
+    closeModal.addEventListener('click', function() {
+        // Remove a instância do mapa para evitar conflitos ao reabrir
+        if (modalMapInstance) {
+            modalMapInstance.remove(); // Remove o mapa atual
+            modalMapInstance = null; // Limpa a variável para permitir recriação do mapa
+        }
+
+        // Fecha a modal
+        detailsModal.style.display = 'none';
+    });
+
+    // Initialize map
+    const mapInstance = L.map(map).setView([0, 0], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(mapInstance);
+
+    function setupCamera() {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(err => console.error('Erro ao acessar a câmera:', err));
+    }
+
+    function takePhoto() {
+        const context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        photo.src = canvas.toDataURL('image/png');
+        photo.style.display = 'block';
+        video.style.display = 'none';
+        canvas.style.display = 'none';
+    }
+
+    function handleFileUpload(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            photo.src = e.target.result;
+            photo.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                latitudeInput.value = lat;
+                longitudeInput.value = lon;
+                showMap(lat, lon);
+                latitudeInput.style.display = 'block';
+                longitudeInput.style.display = 'block';
+                saveLocationBtn.style.display = 'block';
+            });
+        } else {
+            alert('Geolocalização não é suportada por este navegador.');
+        }
+    }
+
+    function showMap(lat, lon) {
+        mapInstance.setView([lat, lon], 13);
+        L.marker([lat, lon]).addTo(mapInstance);
+    }
+
+    function savePhoto() {
+        const title = titleInput.value;
+        const description = descriptionInput.value;
+        const latitude = latitudeInput.value;
+        const longitude = longitudeInput.value;
+        const date = new Date().toISOString();
+        const id = Date.now();
+
+        if (!title) {
+            alert('Título é obrigatório.');
+            return;
+        }
+
+        const photoData = {
+            id,
+            title,
+            description,
+            latitude,
+            longitude,
+            date,
+            photoUrl: photo.src
+        };
+
+        let photos = JSON.parse(localStorage.getItem('photos')) || [];
+        photos.push(photoData);
+        localStorage.setItem('photos', JSON.stringify(photos));
+        displayPhotos();
+        clearForm();
+    }
+
+    function clearForm() {
+        titleInput.value = '';
+        descriptionInput.value = '';
+        latitudeInput.value = '';
+        longitudeInput.value = '';
+        photo.src = '';
+        photo.style.display = 'none';
+        video.style.display = 'block';
+        canvas.style.display = 'block';
+        latitudeInput.style.display = 'none';
+        longitudeInput.style.display = 'none';
+        saveLocationBtn.style.display = 'none';
+    }
+
+    function displayPhotos() {
+        galleryTableBody.innerHTML = '';
+        const photos = JSON.parse(localStorage.getItem('photos')) || [];
+
+        photos.forEach(photo => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${photo.id}</td>
+                <td>${photo.title}</td>
+                <td>${photo.description || ''}</td>
+                <td><a href="#" data-id="${photo.id}" class="view-details">Ver Detalhes</a></td>
+                <td>${photo.date}</td>
+                <td><button data-id="${photo.id}" class="delete-photo">Excluir</button></td>
+            `;
+            galleryTableBody.appendChild(row);
+        });
+
+        // Adiciona evento aos links "Ver Detalhes"
+        document.querySelectorAll('.view-details').forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                const photoId = event.target.getAttribute('data-id');
+                openDetailsModal(photoId);
+            });
+        });
+
+        // Adiciona evento aos botões de "Excluir"
+        document.querySelectorAll('.delete-photo').forEach(button => {
+            button.addEventListener('click', event => {
+                const photoId = event.target.getAttribute('data-id');
+                deletePhoto(photoId);
+            });
+        });
+    }
+
+    function openDetailsModal(photoId) {
+        const photos = JSON.parse(localStorage.getItem('photos')) || [];
+        const photoData = photos.find(photo => photo.id == photoId);
+
+        if (photoData) {
+            // Preenche os detalhes da modal
+            modalTitle.textContent = photoData.title;
+            modalDescription.textContent = photoData.description || 'Sem descrição';
+            modalPhoto.src = photoData.photoUrl;
+
+            // Configura o mapa para mostrar a localização
+            const lat = photoData.latitude;
+            const lon = photoData.longitude;
+
+            const modalMapInstance = L.map(modalMap).setView([lat, lon], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(modalMapInstance);
+            L.marker([lat, lon]).addTo(modalMapInstance);
+
+            // Mostra a modal
+            detailsModal.style.display = 'block';
+        }
+    }
+
+    function deletePhoto(photoId) {
+        let photos = JSON.parse(localStorage.getItem('photos')) || [];
+        photos = photos.filter(photo => photo.id != photoId);
+        localStorage.setItem('photos', JSON.stringify(photos));
+        displayPhotos();
+    }
+
+    // Fechar a modal ao clicar no botão de fechar
+    closeModal.addEventListener('click', function() {
+        detailsModal.style.display = 'none';
+    });
+
+    // Configurar os eventos para capturar foto ou fazer upload
+    capturePhotoBtn.addEventListener('click', setupCamera);
+    uploadPhotoBtn.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', handleFileUpload);
+    getLocationBtn.addEventListener('click', getLocation);
+    savePhotoBtn.addEventListener('click', savePhoto);
+
+    // Inicializar a exibição de fotos salvas
+    displayPhotos();
+});
+
+É preciso seguir essas regras:
+Criar um sistema web que permita ao usuário tirar uma foto com a câmera do dispositivo e marcar a localização da foto em um mapa. O sistema deve exibir a foto tirada e a localização no mapa. Além disso, faça:
+
+ Adicionar um botão para tirar a foto. Use a API navigator.mediaDevices.getUserMedia para acessar a câmera do dispositivo. Caso o dispositivo não tenha câmera, permitir que o usuário faça o upload de uma foto.
+ Adicionar um botão para marcar a localização da foto no mapa. Use a API navigator.geolocation para acessar a localização do dispositivo. Caso o dispositivo não tenha GPS, permitir que o usuário informe a localização manualmente.
+ Adicionar um campo de texto para o usuário informar título (obrigatório) e descrição (opcional) da foto.
+ Armazenar a foto e a localização no localStorage para que elas não sejam perdidas ao recarregar a página.
+ Criar uma tabela para exibir id, título, descrição, localização e data da foto. Adicionar um botão para visualizar detalhes da foto em uma modal ou em outra página. Para a localização, exibir um mapa com a localização marcada.
+ Adicionar um botão para excluir o registro. Exibir um modal de confirmação antes de excluir a foto.
+ Adicionar um botão para editar o registro. Exibir um formulário com os campos preenchidos para que o usuário possa editar o registro.
+ (opcional) Adicionar um botão para compartilhar a foto e a localização em redes sociais.
+
