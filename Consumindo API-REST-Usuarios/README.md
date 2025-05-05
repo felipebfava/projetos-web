@@ -18,6 +18,10 @@ Se o arquivo db.sqlite3 não existir, ao rodar o código ele será criado, se ex
 
 É possível instalar uma extensão chamada SQLite Viewer (ou SQLite) no Visual Studio Code para vermos o arquivo e dar "refresh" para as alterações.
 
+A visualização do banco do arquivo db.sqlite3 está expressa na pasta images no arquivo imgBanco.
+
+Na pasta postman está o arquivo dos métodos HTTP utilizados para com a API (GET, POST, PUT, PATCH, DELETE) no formato json (única maneira que descobri como compartilhar tal arquivo).
+
 #O que fazer?
 Faça requisições para os endpoints da API usando o próprio POSTMAN no Visual Studio Code com a extensão Postman.
 
