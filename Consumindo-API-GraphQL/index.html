@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokéAPI GraphQL Explorer</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>PokéAPI GraphQL Explorer</h1>
+        
+        <div class="search-container">
+            <input type="text" id="pokemon-search" placeholder="Digite o nome do Pokémon..." autocomplete="off">
+            <button id="search-button">Buscar</button>
+        </div>
+
+        <div class="loader" id="loader"></div>
+        
+        <div class="error-message" id="error-message"></div>
+        
+        <div class="pokemon-info" id="pokemon-info">
+            <div class="pokemon-header">
+                <h2 id="pokemon-name"></h2>
+                <span id="pokemon-species"></span>
+            </div>
+            
+            <div class="pokemon-content">
+                <div class="pokemon-image-container">
+                    <img id="pokemon-sprite" alt="Pokémon sprite">
+                    <img id="pokemon-back-sprite" alt="Pokémon back sprite">
+                </div>
+                
+                <div class="pokemon-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Cor:</span>
+                        <span id="pokemon-color"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Peso:</span>
+                        <span id="pokemon-weight"></span>
+                    </div>
+                    
+                    <div class="abilities-container">
+                        <h3>Habilidades:</h3>
+                        <div class="detail-item">
+                            <span class="detail-label">Normal:</span>
+                            <ul id="normal-abilities"></ul>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Especial:</span>
+                            <ul id="special-abilities"></ul>
+                        </div>
+                    </div>
+                    
+                    <div class="audio-container">
+                        <button id="play-cry">Ouvir Grito</button>
+                        <audio id="pokemon-cry" controls></audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="./scripts.js"></script>
+</body>
+</html>
